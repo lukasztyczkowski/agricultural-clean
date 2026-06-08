@@ -1,12 +1,12 @@
-# Krok 1: Budowanie aplikacji Spring Boot + Vaadin w trybie produkcyjnym
-FROM maven:3.9.6-eclipse-temurin-17 AS build
+# Krok 1: Budowanie aplikacji Spring Boot + Vaadin przy użyciu Javy 21
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
 COPY . .
-# Profil -Pproduction instruuje Vaadina, aby zbudował i zoptymalizował frontend
-RUN mvn clean package -Pproduction -DskipTests
+# Budujemy aplikację bez flagi -Pproduction, za to z flagą Vaadin mode w argumentach
+RUN mvn clean package -Dvaadin.productionMode=true -DskipTests
 
-# Krok 2: Uruchomienie zoptymalizowanego pliku .jar
-FROM eclipse-temurin:17-jre
+# Krok 2: Uruchomienie zoptymalizowanego pliku .jar na Javie 21
+FROM eclipse-temurin:21-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
