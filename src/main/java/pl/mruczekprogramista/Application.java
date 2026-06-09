@@ -6,6 +6,8 @@ import com.vaadin.flow.component.page.ColorScheme;
 
 import javax.sql.DataSource;
 
+import com.vaadin.flow.server.AppShellSettings;
+import com.vaadin.flow.theme.Theme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,8 +30,6 @@ import pl.mruczekprogramista.data.SprayRepository;
  */
 @SpringBootApplication
 @EnableScheduling
-@StyleSheet("context://styles.css")
-@ColorScheme(ColorScheme.Value.DARK)
 
 public class Application implements AppShellConfigurator {
     @Autowired
@@ -38,6 +38,11 @@ public class Application implements AppShellConfigurator {
     public static void main(String[] args) {
 
         SpringApplication.run(Application.class, args);
+    }
+    @Override
+    public void configurePage(AppShellSettings settings) {
+        settings.addFavIcon("icon", "icons/icon.png", "192x192");
+        settings.addLink("stylesheet", "context://themes/spray/styles.css");
     }
     @Scheduled(fixedRate = 7200000)
     public void keepDatabaseAlive() {
