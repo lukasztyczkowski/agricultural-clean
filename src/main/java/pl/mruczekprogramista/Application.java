@@ -42,7 +42,8 @@ public class Application implements AppShellConfigurator {
     @Override
     public void configurePage(AppShellSettings settings) {
         settings.addFavIcon("icon", "icons/icon.png", "192x192");
-        settings.addLink("stylesheet", "context://themes/spray/styles.css");
+        settings.addMetaTag("color-scheme","dark");
+
     }
     @Scheduled(fixedRate = 7200000)
     public void keepDatabaseAlive() {
