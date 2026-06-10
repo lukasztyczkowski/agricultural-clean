@@ -7,7 +7,16 @@ RUN apt-get update && apt-get install -y curl \
 WORKDIR /app
 COPY . .
 
+# WAŻNE: full clean build
 RUN mvn clean package -Pproduction -DskipTests
+
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+
+COPY --from=build /app/target/*.jar app.jar
+
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]
 
 
 
