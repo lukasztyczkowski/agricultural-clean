@@ -28,6 +28,7 @@ import pl.mruczekprogramista.data.SprayRepository;
  * and some desktop browsers.
  *
  */
+
 @SpringBootApplication
 @EnableScheduling
 

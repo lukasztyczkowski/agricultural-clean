@@ -1,5 +1,6 @@
 package pl.mruczekprogramista.views;
 
+import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.server.menu.MenuConfiguration;
 import com.vaadin.flow.server.menu.MenuEntry;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -29,6 +30,11 @@ import java.util.List;
 @Layout
 @AnonymousAllowed
 public class MainLayout extends AppLayout implements AfterNavigationObserver {
+
+    @Override
+    protected void onAttach(AttachEvent event) {
+        event.getUI().getElement().getThemeList().add("dark");
+    }
 
     private H1 viewTitle;
 

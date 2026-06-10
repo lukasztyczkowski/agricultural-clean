@@ -1,2 +1,9 @@
 @import url('./main-layout.css');
 @import url('./views/master-detail-view.css');
+
+html {
+color-scheme: dark;
+}
+html[theme~="dark"] {
+    color-scheme: dark;
+}
